@@ -769,7 +769,7 @@ services:
     - alerta
     command: alerta send -r web01 -e NodeUp -E Production -S Website -s major -t "SIEMonster is UP." -v AWESOME
     
-  correlate:
+  elastalert:
     labels:
       io.rancher.container.start_once: 'true'
       io.rancher.container.pull_image: always
