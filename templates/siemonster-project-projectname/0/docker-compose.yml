@@ -2,7 +2,7 @@ version: '2'
 services:
 
   siemonster:
-    build: https://siemonster:${ACCESS_TOKEN}@github.com/siemonster/premium.git#master
+    build: https://siemonster:"${ACCESS_TOKEN}"@github.com/siemonster/premium.git#master
     environment:
       SITE_DNAME: "${SITE_DNAME}"
       SITE_NAME: siemonster
