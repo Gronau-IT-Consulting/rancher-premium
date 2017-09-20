@@ -30,6 +30,37 @@
       required: true
       default: 1g
       type: string
+    - variable: MYSQL_DATABASE
+      label: MYSQL_DATABASE
+      description: MySQL DB for 411
+      type: string
+      required: true
+      default: fouroneone
+    - variable: MYSQL_USER
+      label: MYSQL_USER
+      description: MySQL User for 411
+      type: string
+      required: true
+      default: fouroneone
+    - variable: MYSQL_PASS
+      label: MYSQL_PASS
+      description: MySQL Password for 411
+      type: password
+      required: true
+      type: password
+      default: siemonster
+    - variable: MYSQL_ROOT_PASSWORD
+      label: MYSQL_ROOT_PASSWORD
+      description: MySQL Root Password
+      type: password
+      required: true
+      default: siemonster
+    - variable: SITE_ID
+      label: SITE_ID
+      description: SITE_ID for 411
+      type: int
+      required: true
+      default: 1    
     - variable: GMAILRELAY_EMAIL
       label: GMAILRELAY_EMAIL
       description: enter Gmail Relay e-mail address.
