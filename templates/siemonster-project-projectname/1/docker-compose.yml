@@ -511,6 +511,65 @@ services:
       INTERVAL_SECONDS: 20
       BULK_SIZE: 10
     image: logzio/es2graphite
+    
+  '411':
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.sidekicks: 411-volume
+      io.rancher.scheduler.affinity:host_label: capricorn=1
+    tty: true
+    volumes_from:
+    - 411-volume
+    image: ikuturso/411:2
+    stdin_open: true
+    environment:
+    - "MYSQL_DATABASE=${MYSQL_DATABASE}"
+    - "MYSQL_USER=${MYSQL_USER}"
+    - "MYSQL_PASS=${MYSQL_PASS}"
+    - "SITE_ID=${SITE_ID}"
+    depends_on:
+    - mysqldb
+    links:
+    - es-client-2:es-client
+    - gmailrelay
+    - alerta
+    hostname: 411.${SITE_DNAME}
+
+  411-volume:
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label: capricorn=1
+    tty: true
+    volumes:
+    - /data
+    image: ikuturso/411:2
+    stdin_open: true
+    command: /bin/bash
+    
+  mysqldb:
+    image: ikuturso/msqldb-411
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label_soft_ne: kraken=1,tiamat=1
+      io.rancher.sidekicks: mysqldata
+    environment:
+    - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+    - "MYSQL_DATABASE=${MYSQL_DATABASE}"
+    - "MYSQL_USER=${MYSQL_USER}"
+    - "MYSQL_PASSWORD=${MYSQL_PASS}"
+    volumes_from:
+    - mysqldata
+    
+  mysqldata:
+    labels:
+      io.rancher.scheduler.affinity:host_label_soft_ne: kraken=1,tiamat=1
+      io.rancher.container.start_once: true
+    container_name: mysqldata
+    image: gliderlabs/alpine
+    volumes:
+    - /var/lib/mysql
+    command: /bin/sh
 
   health:
     labels:
