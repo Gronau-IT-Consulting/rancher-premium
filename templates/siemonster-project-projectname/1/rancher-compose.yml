@@ -96,7 +96,5 @@ msa-volume:
 heaven-backend:
   scale: 1
   retain_ip: true
-  
-es-data-node:
-  scale: 2
+
 
