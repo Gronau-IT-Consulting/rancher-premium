@@ -309,7 +309,7 @@ services:
     tty: true
     volumes_from:
     - 411-volume
-    bimage: ikuturso/411:2
+    image: ikuturso/411:2
     stdin_open: true
     environment:
     - "MYSQL_DATABASE=${MYSQL_DATABASE}"
