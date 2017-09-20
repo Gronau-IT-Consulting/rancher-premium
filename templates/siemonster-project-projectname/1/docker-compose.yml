@@ -317,7 +317,7 @@ services:
     - "MYSQL_PASS=${MYSQL_PASS}"
     - "SITE_ID=${SITE_ID}"
     depends_on:
-      - mysqldb
+    - mysqldb
     links:
     - es-client-2:es-client
     - gmailrelay
@@ -342,7 +342,6 @@ services:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label_soft_ne: kraken=1,tiamat=1
       io.rancher.sidekicks: mysqldata
-    container_name: 411data
     environment:
     - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
     - "MYSQL_DATABASE=${MYSQL_DATABASE}"
